@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 
-export default function Slider() {
+export default function Slider({ setLength }: { setLength: any }) {
   const [passLength, setPassLength] = useState<number>(10);
-  const percent = ((passLength - 0) / (25 - 0)) * 100;
+  const percent = ((passLength - 5) / 20) * 100;
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassLength(parseInt(e.target.value));
+    const newLength = parseInt(e.target.value);
+    setPassLength(newLength);
+    setLength(newLength);
   };
 
   return (
@@ -27,7 +29,7 @@ export default function Slider() {
         id="password-length"
         name="password-length"
         type="range"
-        min={0}
+        min={5}
         max={25}
         value={passLength}
         onChange={handleRangeChange}

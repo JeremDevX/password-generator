@@ -1,16 +1,44 @@
 "use client";
 
-export default function Strength() {
+export default function Strength({ strength }: { strength: number }) {
+  let filledSquares = 0;
+  let strengthNum = "";
+  let strengthString = "";
+
+  if (strength === 0) {
+    strengthNum = "";
+    strengthString = "";
+    filledSquares = 0;
+  } else if (strength <= 35) {
+    strengthNum = "tooweak";
+    strengthString = "TOO WEAK";
+    filledSquares = 1;
+  } else if (strength <= 60) {
+    strengthNum = "weak";
+    strengthString = "WEAK";
+    filledSquares = 2;
+  } else if (strength <= 90) {
+    strengthNum = "medium";
+    strengthString = "MEDIUM";
+    filledSquares = 3;
+  } else if (strength > 90) {
+    strengthNum = "strong";
+    strengthString = "STRONG";
+    filledSquares = 4;
+  }
+
   return (
     <div className="bg-[var(--background)] py-4 px-6 flex items-center justify-between">
       <p className="text-[var(--light-gray)] font-semibold">STRENGTH</p>
       <div className="flex items-center gap-4">
-        <p className="text-lg font-bold">MEDIUM</p>
+        <p className="text-lg font-bold">{strengthString}</p>
         <div className="flex gap-1">
-          <FilledSquare str="weak" />
-          <FilledSquare str="medium" />
-          <FilledSquare str="strong" />
-          <FilledSquare />
+          {[...Array(filledSquares)].map((_, i) => (
+            <FilledSquare key={i} str={strengthNum} />
+          ))}
+          {[...Array(4 - filledSquares)].map((_, i) => (
+            <FilledSquare key={i} />
+          ))}
         </div>
       </div>
     </div>
