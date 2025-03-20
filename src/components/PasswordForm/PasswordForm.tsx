@@ -3,7 +3,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import Slider from "../Slider/Slider";
 import Strength from "../Strength/Strength";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { PasswordOptions } from "@/app/page";
 
 export default function PasswordForm({
@@ -11,71 +11,60 @@ export default function PasswordForm({
   generatePassword,
   passwordStrength,
 }: {
-  setOptions: any;
+  setOptions: Dispatch<SetStateAction<PasswordOptions>>;
   generatePassword: () => void;
   passwordStrength: number;
 }) {
-  const [length, setLength] = useState(10);
-  const [uppercase, setUppercase] = useState(false);
-  const [lowercase, setLowercase] = useState(false);
-  const [numbers, setNumbers] = useState(false);
-  const [specialCharacters, setSpecialCharacters] = useState(false);
-
   return (
     <div className="flex flex-col bg-[var(--dark-gray)] p-6 h-120 w-full justify-between">
       <Slider
-        setLength={(newLength: number) => {
-          setLength(newLength);
-          setOptions((prevOptions: PasswordOptions) => ({
+        setLength={(newLength: number) =>
+          setOptions((prevOptions) => ({
             ...prevOptions,
             length: newLength,
-          }));
-        }}
+          }))
+        }
       />
       <ul className="flex flex-col gap-4">
         <OptionLine
           id="uppercase"
           name="Includes UpperCase Letters"
-          setValue={(newValue: boolean) => {
-            setUppercase(newValue);
-            setOptions((prevOptions: PasswordOptions) => ({
+          setValue={(newValue: boolean) =>
+            setOptions((prevOptions) => ({
               ...prevOptions,
               uppercase: newValue,
-            }));
-          }}
+            }))
+          }
         />
         <OptionLine
           id="lowercase"
           name="Includes Lowercase Letters"
-          setValue={(newValue: boolean) => {
-            setLowercase(newValue);
-            setOptions((prevOptions: PasswordOptions) => ({
+          setValue={(newValue: boolean) =>
+            setOptions((prevOptions) => ({
               ...prevOptions,
               lowercase: newValue,
-            }));
-          }}
+            }))
+          }
         />
         <OptionLine
           id="numbers"
           name="Includes Numbers"
-          setValue={(newValue: boolean) => {
-            setNumbers(newValue);
-            setOptions((prevOptions: PasswordOptions) => ({
+          setValue={(newValue: boolean) =>
+            setOptions((prevOptions) => ({
               ...prevOptions,
               numbers: newValue,
-            }));
-          }}
+            }))
+          }
         />
         <OptionLine
           id="specialCharacters"
           name="Includes Symbols"
-          setValue={(newValue: boolean) => {
-            setSpecialCharacters(newValue);
-            setOptions((prevOptions: PasswordOptions) => ({
+          setValue={(newValue: boolean) =>
+            setOptions((prevOptions) => ({
               ...prevOptions,
               specialCharacters: newValue,
-            }));
-          }}
+            }))
+          }
         />
       </ul>
       <Strength strength={passwordStrength} />
@@ -96,7 +85,7 @@ function OptionLine({
 }: {
   id: string;
   name: string;
-  setValue: any;
+  setValue: Dispatch<boolean>;
 }) {
   return (
     <li className="flex items-center gap-2">

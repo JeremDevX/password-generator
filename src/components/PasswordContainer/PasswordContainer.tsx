@@ -17,6 +17,7 @@ export default function PasswordContainer({ password }: { password: string }) {
       textarea.select();
       document.execCommand("copy");
       document.body.removeChild(textarea);
+      console.error(err);
     }
 
     setCopied(true);

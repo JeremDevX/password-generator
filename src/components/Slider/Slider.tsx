@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 
-export default function Slider({ setLength }: { setLength: any }) {
+export default function Slider({ setLength }: { setLength: Dispatch<number> }) {
   const [passLength, setPassLength] = useState<number>(10);
   const percent = ((passLength - 5) / 20) * 100;
 
